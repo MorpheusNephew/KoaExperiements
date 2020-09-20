@@ -16,8 +16,8 @@ app.use(async (ctx, next) => {
   switch (ctx.accepts(acceptableTypes)) {
     case "xml":
       const result = ctx.body;
-      ctx.type = "xml";
 
+      ctx.type = "xml";
       ctx.body = convertToXml(result);
       break;
     // Json is handled automatically with Koa
