@@ -1,0 +1,23 @@
+### Get all users: JSON
+GET http://localhost:3000/users
+Accept: application/json
+
+### Get user (1): JSON
+GET http://localhost:3000/users/1
+Accept: application/json
+
+### Get all users: XML
+GET http://localhost:3000/users
+Accept: application/xml
+
+### Get user (1): XML
+GET http://localhost:3000/users/1
+Accept: application/xml
+
+### Get all users: HTML
+GET http://localhost:3000/users
+Accept: text/html
+
+### Get user (1): HTML
+GET http://localhost:3000/users/1
+Accept: text/html
