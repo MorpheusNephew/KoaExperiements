@@ -68,7 +68,7 @@ function convertToXml(obj: any): string {
       if (Array.isArray(element)) {
         xmlString.push(`<${pluralize.singular(key)}>`);
         xmlString.push(element.map(convertToXml).join(""));
-        xmlString.push(`<${pluralize.singular(key)}>`);
+        xmlString.push(`</${pluralize.singular(key)}>`);
       } else if (typeof element === "object") {
         xmlString.push(convertToXml(element));
       } else {
