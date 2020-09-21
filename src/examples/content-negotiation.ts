@@ -66,9 +66,18 @@ function convertToXml(obj: any): string {
       xmlString.push(`<${key}>`);
 
       if (Array.isArray(element)) {
-        xmlString.push(`<${pluralize.singular(key)}>`);
-        xmlString.push(element.map(convertToXml).join(""));
-        xmlString.push(`</${pluralize.singular(key)}>`);
+        xmlString.push(
+          element
+            .map((elm) => {
+              let arrayXml = [];
+              arrayXml.push(`<${pluralize.singular(key)}>`);
+              arrayXml.push(convertToXml(elm));
+              arrayXml.push(`</${pluralize.singular(key)}>`);
+
+              return arrayXml.join("");
+            })
+            .join("")
+        );
       } else if (typeof element === "object") {
         xmlString.push(convertToXml(element));
       } else {
