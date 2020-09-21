@@ -38,7 +38,7 @@ router.get("/users", (ctx) => {
   ctx.body = { users };
 });
 
-router.get("/users/:userId?", (ctx) => {
+router.get("/users/:userId", (ctx) => {
   const userId: number = ctx.params.userId;
 
   const user = users.find((user) => user.id == userId);
