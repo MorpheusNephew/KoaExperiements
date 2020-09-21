@@ -1,5 +1,7 @@
 import * as Koa from "koa";
 import * as Router from "@koa/router";
+import * as pluralize from "pluralize";
+
 import { user } from "../models";
 
 const app = new Koa();
@@ -26,18 +28,14 @@ app.use(async (ctx, next) => {
   }
 });
 
-const users = [
+const users: user[] = [
   { id: 1, age: 27, name: { first: "Jim", last: "Doe" } },
   { id: 2, age: 40, name: { first: "John", last: "Doe" } },
   { id: 3, age: 35, name: { first: "Jane", last: "Doe" } },
 ];
 
 router.get("/users", (ctx) => {
-  const response = users.map((user) => ({
-    user,
-  }));
-
-  ctx.body = { users: response };
+  ctx.body = { users };
 });
 
 router.get("/users/:userId?", (ctx) => {
@@ -68,7 +66,9 @@ function convertToXml(obj: any): string {
       xmlString.push(`<${key}>`);
 
       if (Array.isArray(element)) {
+        xmlString.push(`<${pluralize.singular(key)}>`);
         xmlString.push(element.map(convertToXml).join(""));
+        xmlString.push(`<${pluralize.singular(key)}>`);
       } else if (typeof element === "object") {
         xmlString.push(convertToXml(element));
       } else {
